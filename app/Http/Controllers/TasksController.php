@@ -35,6 +35,11 @@ class TasksController extends Controller
 
         return view('tasks.create', [
             'task' => $task,
+        ]);    
+            $this->validate($request, [
+            'content' => 'required|max:255',
+            'title' => 'required|max:255',
+            'status' => 'required|max:10',
         ]);
     }
 
@@ -49,7 +54,14 @@ class TasksController extends Controller
         $task = new Task; 
         $task->content = $request->content;
         $task->title = $request->title;
+        $task->status = $request->status; 
         $task->save();
+        
+        $this->validate($request, [
+            'content' => 'required|max:255',
+            'title' => 'required|max:255',
+            'status' => 'required|max:10',
+        ]);
 
         return redirect('/');
     }
@@ -95,6 +107,8 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         $task->content = $request->content;
+        $task->title = $request->title;
+        $task->status = $request->status;
         $task->save();
 
         return redirect('/');

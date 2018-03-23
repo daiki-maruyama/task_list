@@ -8,6 +8,8 @@
     
     <p>{{ $task->content }}</p>
     
+    <p>{{ $task->status }}</p>
+    
     {!! link_to_route('tasks.edit', 'この内容を編集', ['id' => $task->id]) !!}
     
     {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
