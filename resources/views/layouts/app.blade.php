@@ -6,8 +6,9 @@
     </head>
 
     <body>
-        @yield('content')
         
         @include('commons.error_messages')
+        
+        @yield('content')
     </body>
 </html>

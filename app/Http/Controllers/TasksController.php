@@ -31,16 +31,11 @@ class TasksController extends Controller
      */
     public function create()    //新規作成
     {
-        $task = new Task;
+       $task = new Task;
 
         return view('tasks.create', [
             'task' => $task,
         ]);    
-            $this->validate($request, [
-            'content' => 'required|max:255',
-            'title' => 'required|max:255',
-            'status' => 'required|max:10',
-        ]);
     }
 
     /**
@@ -51,17 +46,17 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new Task; 
-        $task->content = $request->content;
-        $task->title = $request->title;
-        $task->status = $request->status; 
-        $task->save();
-        
         $this->validate($request, [
             'content' => 'required|max:255',
             'title' => 'required|max:255',
             'status' => 'required|max:10',
         ]);
+        
+        $task = new Task; 
+        $task->content = $request->content;
+        $task->title = $request->title;
+        $task->status = $request->status; 
+        $task->save();
 
         return redirect('/');
     }
@@ -105,6 +100,12 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)   //更新
     {
+        $this->validate($request, [
+            'content' => 'required|max:255',
+            'title' => 'required|max:255',
+            'status' => 'required|max:10',
+        ]);
+        
         $task = Task::find($id);
         $task->content = $request->content;
         $task->title = $request->title;
